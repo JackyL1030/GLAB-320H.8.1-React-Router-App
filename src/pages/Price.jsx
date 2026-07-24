@@ -6,7 +6,7 @@ export default function Price() {
 
   const { symbol } = useParams();
 
-  const url = `https://rest.coinapi.io/v1/exchangerate/${symbol}/USD?apikey=${apiKey}`;
+  const url = `https://rest.coinapi.io/v1/exchangerate/${symbol}/BTC/?apikey=${apiKey}`;
 
   const [coin, setCoin] = useState(null);
 
