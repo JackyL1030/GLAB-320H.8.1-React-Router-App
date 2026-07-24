@@ -6,7 +6,7 @@ export default function Price() {
 
   const { symbol } = useParams();
 
-  const url = `https://rest.coinapi.io/v1/exchangerate/${symbol}/?apikey=${apiKey}`;
+  const url = `https://rest.coincap.io/v3/price/bysymbol/${symbol}?apiKey=${apiKey}`;
 
   const [coin, setCoin] = useState(null);
 
@@ -14,6 +14,7 @@ export default function Price() {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
       setCoin(data);
     } catch (error) {
       console.error(error);
@@ -28,9 +29,9 @@ export default function Price() {
     return (
       <div>
         <h1>
-          {coin.asset_id_base}/{coin.asset_id_quote}
+          {symbol.toUpperCase()}
         </h1>
-        <h2>{coin.rate}</h2>
+        <h2>{coin.data[0]}</h2>
       </div>
     );
   };
@@ -39,5 +40,5 @@ export default function Price() {
     return <h1>Loading...</h1>;
   };
 
-  return coin?.rate ? loaded() : loading();
+  return coin?.data ? loaded() : loading();
 }
